@@ -7,8 +7,8 @@ public class DoublyLinkLis {
 	
 	class Node {
 		int data;
-		Node prev;
-		Node next;
+		Node prev=null;
+		Node next=null;
 		
 		// Конструкторы
 		Node (int d) {	data = d;}		
@@ -94,17 +94,18 @@ public class DoublyLinkLis {
 		
 	}
 	
-	public void search_node(Node node, int data){
+	public Node search_node(Node node, int data){
 		Node last = null;
 		// поиск от начала и до конца
 		while (node != null)
 		{
 			if (node.data == data) {
-				System.out.println ("Элемент найден! " + node.data);
+				return node;
 			}
 			last = node;
 			node = node.next;
 		}
+		return last;
 	}
 	
 	// Метод работает по принципу, задаётся нода после которой удаляем, и нода какая по счёту от которой удаляем
@@ -172,6 +173,7 @@ public class DoublyLinkLis {
 		ddl.print_List(ddl.head);
 		
 		// Тестируем поиск
-		ddl.search_node(ddl.head, 7);
+		if(ddl.search_node(ddl.head, 7) != null)System.out.println("Элемент найден. Тест пройден!");
+		System.out.println(ddl.search_node(ddl.head, 7) + " - Тот самый элемент.");
 	}
 }
