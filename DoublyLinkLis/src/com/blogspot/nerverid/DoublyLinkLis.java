@@ -30,28 +30,18 @@ public class DoublyLinkLis {
 	}
 	
 	// Добавляем ноду в конец списка
-	public void add_end(int new_data)
-	{
-		Node new_Node = new Node(new_data);
-
-		Node last = head;
-		
-		new_Node.next = null;
-		
-		if (head == null){
-			new_Node.prev = null;
-			head = new_Node;
-			return;
-		}
-		
-		while (last.next != null){
-			last = last.next;
-		}
-		
-		last.next = new_Node;
-		
-		new_Node.prev = last;
-	}
+	 void add_end(int data) {          //добавление в конец списка
+        Node a = new Node();  //создаём новый элемент
+        a.data = data;
+        if (tail == null)           //если список пуст
+        {                           //то указываем ссылки начала и конца на новый элемент
+            head = a;               //т.е. список теперь состоит из одного элемента
+            tail = a;
+        } else {
+            tail.next = a;          //иначе "старый" последний элемент теперь ссылается на новый
+            tail = a;               //а в указатель на последний элемент записываем адрес нового элемента
+        }
+    }
 	
 	public void print_List(Node node){
 		Node last = null;
