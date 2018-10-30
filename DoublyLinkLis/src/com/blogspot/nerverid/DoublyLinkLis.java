@@ -1,169 +1,152 @@
 package com.blogspot.nerverid;
 
+import main.DoblyLinkedList;
+import main.DoblyLinkedList.Node;
+
 public class DoublyLinkLis {
 	
-	Node head;
-	Node tail;
+	Node head;  // Ссылка на начало списка
+	Node tail;  // Ссылка на конец списка
 	
-	class Node {
-		int data;
-		Node prev=null;
-		Node next=null;
+	class Node{  // Внутренний класс элемента списка
+		int data; 	// Какие-то данные
+		Node next;	// Ссылка на последующий элемент
+		Node prev;	// Ссылка на предыдущий элемент
 		
-		// Конструкторы
-		Node (int d) {	data = d;}		
-		Node (){ data = 0;}
-	}
-	
-	// Добавление ноды в начало списка
-	public void add_front(int new_data)
-	{
-		Node new_Node = new Node(new_data);
-		new_Node.next = head;
-		new_Node.prev = null;
-		
-		// Если список не пустой, присваиваем последующей ноде ссылку на вновь созданную
-		if (head != null) head.prev = new_Node;
-		
-		// Присваиваем указателю адрес новой ноды
-		head = new_Node;
-	}
-	
-	// Добавляем ноду в конец списка
-	 void add_end(int data) {          //добавление в конец списка
-        Node a = new Node();  //создаём новый элемент
-        a.data = data;
-        if (tail == null)           //если список пуст
-        {                           //то указываем ссылки начала и конца на новый элемент
-            head = a;               //т.е. список теперь состоит из одного элемента
-            tail = a;
-        } else {
-            tail.next = a;          //иначе "старый" последний элемент теперь ссылается на новый
-            tail = a;               //а в указатель на последний элемент записываем адрес нового элемента
-        }
-    }
-	
-	public void print_List(Node node){
-		Node last = null;
-		
-		// печать от начала и до конца
-		while (node != null)
-		{
-			System.out.print(node.data + " ");
-			last = node;
-			node = node.next;
+		// Конструктор с параметром, инициализирует ссылки
+		Node (int data){  
+			this.data = data;
+			next = null;
+			prev = null;
 		}
 		
-		System.out.println("");
-		// печать от конца к началу
-		while(last != null)
-		{
-			System.out.print(last.data + " ");
-			last = last.prev;
+		// Конструктор без параметра, инициализирует значения и ссылки
+		Node (){
+			this.data = 0;
+			next = null;
+			prev = null;
 		}
 	}
 	
-	public void InsertAftr(Node prim_node, int data)
-	{
-		// Проверяем не равна ли нулю
-		if(prim_node != null)
-		{
-			System.out.println(" ");
-			System.out.println("Не нулевая!");
-		} else return;
+	// Метод добавления в начало списка
+	public void addFront (int data){
+		Node newNode = new Node(); // Создаём элемент без параметра
+		newNode.data = data;		// Вручную заносим параметр
+		newNode.prev = null;		// Ссылку на предыдущий элемент ставим нулевой
 		
-		Node new_node = new Node(data);
-		new_node.next = prim_node.next;
-		prim_node.next = new_node;
-		
-		new_node.prev = prim_node;
-		
-		if (new_node.next != null){
-			new_node.next.prev = new_node;
+		if (head == null){			// Если объявленные ссылки на первый и последний элементы нулевые, то есть список пустой
+			head = newNode;			// Присваиваем ссылки первого и последнего элемента единственному созданному
+			tail = newNode;
+		} else {
+			newNode.next = head;	// Иначе в новом элементе присваиваем ссылку первого элемента, ссылке на следующий.
+			head = newNode;			// И ссылку заголовка ставим на вновь созданный элемент.
 		}
-		
 	}
 	
-	public Node search_node(Node node, int data){
-		Node last = null;
-		// поиск от начала и до конца
-		while (node != null)
-		{
-			if (node.data == data) {
-				return node;
+	// Метод добавления в конец списка.
+	public void addBack (int data){
+		Node newNode = new Node();
+		newNode.data = data;
+		newNode.next = null;
+		
+		if (tail == null){	// Если объявленные ссылки на первый и последний элементы нулевые, то есть список пустой
+			head = newNode; // Присваиваем ссылкам на начало и конец, единственный новый элемент
+			tail = newNode;
+		} else {
+			tail.next = newNode;	//	Иначе ставим ссылку последнего злемнта на новый созданный
+			tail = newNode;			//	ссылку конца списка присваиваем новый элемент
+		}
+	}
+	
+	// Метод вставки после указаанного элемента
+	public void insertAfter(Node prevNode, int data){
+		if ( prevNode != null){					// Проверяем указана ли вообще предыдущий элемент
+			System.out.println("Не пустая!");
+		} else return;							// Если предыдущий элемент пустой то вываливаемся из метода.
+		
+		Node newNode = new Node (data);
+		if (prevNode != tail){
+			newNode.next = prevNode.next;			// Присваиваем в новом элементе ссылке на следюущий элемент ссылку из предыдущего элемента
+			prevNode.next = newNode;				// Предыдущему в качестве ссылки на следующий элемент - новый элемент
+			newNode.prev = prevNode;				// В новом Эл. ссылка на предыдущий Эл.
+			newNode.next.prev = newNode;			//	Если это не последний элемент то в следующем элементе ссылку на предыдущий новый Эл.
+		} else {
+			tail.next = newNode;
+			newNode.prev = tail;
+			tail = newNode;
+		}
+	}
+	
+	public Node search(int data){
+		Node newNode = head;
+		Node nodeNon = null;
+		while (newNode != null){		// Ищем от начала и до конца.
+			if (newNode.data == data){
+				return newNode;			//	Возвращаем либо найденный элемент
 			}
-			last = node;
-			node = node.next;
+			newNode = newNode.next;
 		}
-		return last;
+		return nodeNon;					//	Либо возвращаем нулевой элемент.
 	}
 	
-	// Метод работает по принципу, задаётся нода после которой удаляем, и нода какая по счёту от которой удаляем
-    void remove(Node head_ref, Node del) { 
-  
-        // Проверяем не пустой ли список и не нулевая ли удаляемая нода
-        if (head == null || del == null) { 
-            return; 
-        } 
-  
-        // Если первая нода и есть удаляемая
-        if (head == del) { 
-            head = del.next; 
-        } 
-  
-       // если удаляемая не последняя присваиваем, ссылку на предыдущий, элемента за удаляемым, на предыдущую от удаляемого
-        if (del.next != null) { 
-            del.next.prev = del.prev; 
-        } 
-  
-        // меняем ссылку , на послед. элем, предыдущего эл. от удаляемого на последующий от удаляемого
-        if (del.prev != null) { 
-            del.prev.next = del.next; 
-        } 
-  
-        // выходим
-        return; 
-    } 
-	
-    // Метод подсчёта элементов
-    public int countNode ()
-	{
-		Node t = head;
-		int cntNode = 0;
-		while (t != null){
-			t = t.next;
-			cntNode++;
+	public void remove(Node headNode, Node delNode){
+		if (head == null || delNode == null) return;
+		if (head == delNode) {
+			head = delNode.next;
+			return;
 		}
-		return cntNode;
+		if (tail == delNode) {
+			tail = delNode.prev;
+			return;
+		}
+		if (delNode.next != null) delNode.next.prev = delNode.prev;
+		if (delNode.prev != null) delNode.prev.next = delNode.next;
 	}
-    
-	public static void main(String [] args){
-		
-		DoublyLinkLis ddl = new DoublyLinkLis();
-		// Тестируем добавление
-		ddl.add_front(6);
-		ddl.add_front(4);
-		if(ddl.countNode() > 0) System.out.println("Элементы добавлен. Тест пройден!");		
-		
-		ddl.add_end(7);
-		ddl.add_end(8);
-		
-		if (ddl.countNode() >= 4) System.out.println ("Элементы в конец добавлены. Тест пройден!");
-		
-		ddl.print_List(ddl.head);
-		
-		// Добавляем элемент после заданного
-		ddl.InsertAftr(ddl.head.next, 5);
-		if(ddl.countNode() >= 5) System.out.println("Элемент добавлен. Тест пройден!");
-		ddl.print_List(ddl.head);
-		
-		// Тестируем удаление элемента
-		ddl.remove(ddl.head, ddl.head);
-		if(ddl.countNode() < 5) System.out.println("Элемент удалён. Тест пройден!"); 
-		ddl.print_List(ddl.head);
-		
-		// Тестируем поиск
-		if(ddl.search_node(ddl.head, 7) != null)System.out.println("Элемент найден. Тест пройден!");
-		System.out.println(ddl.search_node(ddl.head, 7) + " - Тот самый элемент.");
+	
+	// Метод подсчёта всех элементов или длинны всго списка
+	public int countList(){
+		Node newNode = head;
+		int Count=0;
+		while (newNode != null){
+			newNode = newNode.next;
+			Count++;
+		}
+		return Count;
 	}
+	
+	// Метод вывода всех элементов, задаётся первый элемент и листается в конец списка
+	public void printList(){
+		Node nNode = head;
+		while ( nNode != null){
+			System.out.print(nNode.data + " ");
+			nNode = nNode.next;
+		}
+		Node tNode = tail;
+		while ( tNode != null){
+			System.out.print(tNode.data + " ");
+			tNode = tNode.prev;
+		}
+	}
+	
+	public static void main(String[] args) {
+		DoblyLinkedList ddl = new DoblyLinkedList();
+		
+		ddl.addFront(3);
+		ddl.addFront(1);
+		
+		ddl.addBack(5);
+		ddl.addBack(7);
+		
+		ddl.insertAfter(ddl.head, 2);
+		ddl.insertAfter(ddl.tail, 8);
+		
+		ddl.printList();
+		
+		ddl.remove(ddl.head, ddl.head.next);
+		
+		System.out.println(ddl.search(7));
+		
+		ddl.printList();
+	}
+
 }
