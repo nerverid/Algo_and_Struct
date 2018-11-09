@@ -10,6 +10,33 @@ public class CircularLinkedList {
 		int data;
 		Node next;
 		Node prev;
+		
+		Node (int data){
+			this.data = data;
+			next = null;
+			prev = null;
+		}
+		
+		Node (){
+			next = null;
+			prev = null;
+		}
+	}
+	
+	public void add (int data){
+		Node newNode = new Node ();
+		newNode.data = data;
+		newNode.next = null;
+	}
+	
+	public int count (){
+		Node newNode = head;
+		int Count = 0;
+		while (newNode != null){
+			newNode = newNode.next;
+			Count++;
+		}
+		return Count;
 	}
 	
 	public static void main(String[] args) {
@@ -20,7 +47,7 @@ public class CircularLinkedList {
 		cll.add(2);
 		cll.add(4);
 		if (cll.count()> 1) System.out.println("Elements added. Test complit! Элементы добавлены. Тест пройден");
-		
+		/*
 		// Test for delete element into set
 		// Тестируем удаление элемента
 		cll.delete(4);
@@ -33,7 +60,7 @@ public class CircularLinkedList {
 		// Test searching element
 		// Тестируем поиск элемента.
 		if (cll.search(5) != null) System.out.println("Element search complit. Test compit! Элемент найден. Тест пройден!");
-		
+		*/
 	}
 
 }
