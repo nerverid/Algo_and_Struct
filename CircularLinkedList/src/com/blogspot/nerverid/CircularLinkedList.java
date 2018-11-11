@@ -25,7 +25,17 @@ public class CircularLinkedList {
 	public void add (int data){
 		Node newNode = new Node ();
 		newNode.data = data;
-		newNode.next = null;
+		if (head == null) {			// Проверяем на пустой список, если заголовок пуст то пишем туда элемент и выходим
+			head = newNode;
+			return;
+		}							// Если список не пуст то,
+		newNode.next = null;		// перебираем весь список до последнего элемента
+		Node last = head;
+		while (last.next != null) {
+			last = last.next;
+		}
+		last.next = newNode;       // В последний элемент пишем.
+		return;
 	}
 	
 	public int count (){
