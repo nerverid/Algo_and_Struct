@@ -5,7 +5,6 @@ public class CircularLinkedList {
 	Node head;  // В отличие от Simply Linked List, или Doubly Linked List
 				// нам не понадобится указатель "хвоста"-tail, так как в данной разновидности
 				// последний элемент ссылается на первый. Потому и кольцевой список.
-	
 	class Node{
 		int data;
 		Node next;
@@ -39,6 +38,14 @@ public class CircularLinkedList {
 		return Count;
 	}
 	
+	public void printList() {
+		Node newNode = head;
+		while (newNode != null) {
+			System.out.print(newNode.data + " ");
+			newNode = newNode.next;
+		}
+	}
+	
 	public static void main(String[] args) {
 		CircularLinkedList cll = new CircularLinkedList();
 		
@@ -46,7 +53,8 @@ public class CircularLinkedList {
 		// Тестируем добавление элемента
 		cll.add(2);
 		cll.add(4);
-		if (cll.count()> 1) System.out.println("Elements added. Test complit! Элементы добавлены. Тест пройден");
+		//if (cll.count()> 1) System.out.println("Elements added. Test complit! Элементы добавлены. Тест пройден");
+		cll.printList();
 		/*
 		// Test for delete element into set
 		// Тестируем удаление элемента
