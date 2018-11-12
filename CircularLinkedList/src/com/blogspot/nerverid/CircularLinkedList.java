@@ -2,7 +2,7 @@ package com.blogspot.nerverid;
 
 public class CircularLinkedList {
 
-	Node head;  // В отличие от Simply Linked List, или Doubly Linked List
+	Node head =null;  // В отличие от Simply Linked List, или Doubly Linked List
 				// нам не понадобится указатель "хвоста"-tail, так как в данной разновидности
 				// последний элемент ссылается на первый. Потому и кольцевой список.
 	class Node{
@@ -22,20 +22,20 @@ public class CircularLinkedList {
 		}
 	}
 	
-	public void add (int data){
+	public Node add (int data){
 		Node newNode = new Node ();
-		newNode.data = data;
-		if (head == null) {			// Проверяем на пустой список, если заголовок пуст то пишем туда элемент и выходим
-			head = newNode;
-			return;
-		}							// Если список не пуст то,
-		newNode.next = null;		// перебираем весь список до последнего элемента
 		Node last = head;
-		while (last.next != null) {
-			last = last.next;
-		}
-		last.next = newNode;       // В последний элемент пишем.
-		return;
+		newNode.data = data;
+		if (head != null) {			
+			while (last.next != null) {
+				last = last.next;
+			}
+			last.next = newNode;
+		} else {							
+			newNode.next = newNode;		
+		}    
+		head = newNode;
+		return head;
 	}
 	
 	public int count (){
@@ -50,10 +50,12 @@ public class CircularLinkedList {
 	
 	public void printList() {
 		Node newNode = head;
-		while (newNode != null) {
-			System.out.print(newNode.data + " ");
-			newNode = newNode.next;
-		}
+		if (head != null) {
+			do {
+				System.out.print(newNode.data + " ");
+				newNode = newNode.next;
+			}while (newNode != head);
+		} 
 	}
 	
 	public static void main(String[] args) {
@@ -63,7 +65,7 @@ public class CircularLinkedList {
 		// Тестируем добавление элемента
 		cll.add(2);
 		cll.add(4);
-		//if (cll.count()> 1) System.out.println("Elements added. Test complit! Элементы добавлены. Тест пройден");
+		if (cll.count()> 1) System.out.println("Elements added. Test complit! Элементы добавлены. Тест пройден");
 		cll.printList();
 		/*
 		// Test for delete element into set
