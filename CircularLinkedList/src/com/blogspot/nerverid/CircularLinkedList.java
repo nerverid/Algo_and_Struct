@@ -38,12 +38,35 @@ public class CircularLinkedList {
 		}
 	}
 	
+
+	public void delete (int data){
+		Node last = head;
+		CircularLinkedList ccl = new CircularLinkedList();
+		if (head == null){
+			System.out.println("Sets havn't Elements");
+			return;
+		}
+		if (data == head.data){
+			head = null;
+		} else{
+			do {
+				if (last.next.data == data) break; // если нашли совпадение то прерываем цикл и пробрасываем ссылку на следующий элемент таким образом элемент удаляется (выпадает)
+				last = last.next;
+			} while (last != head);
+			last.next = last.next.next;
+		}		
+	}
+	
+	public int search (int data){
+		return 0;
+	}
+	
 	public int count (){
 		Node newNode = head;
 		int countN = 0;
 		do {
-			newNode = newNode.next;
 			countN++;
+			newNode = newNode.next;
 		} while (newNode != head);		// в каждом цикле листаем список до первого-заголовка элемента, список кольцевой
 		System.out.println("Nodes = " + countN);
 		return countN;
@@ -66,12 +89,13 @@ public class CircularLinkedList {
 		cll.add(4);
 		if (cll.count()> 1) System.out.println("Elements added. Test complit! Элементы добавлены. Тест пройден");
 		cll.printList();
-		/*
+		
 		// Test for delete element into set
 		// Тестируем удаление элемента
 		cll.delete(4);
-		if (cll.count()<2) System.out.printkn("Element delete. Test complit! Элемент удалён. Тест пройден!")
-		
+		if (cll.count()<2) System.out.println("Element delete. Test complit! Элемент удалён. Тест пройден!");
+		cll.printList();
+		/*
 		// Test inserting new element after selected element
 		// Тестируем вставку элементов после выбранного
 		cll.insertAfter(head.next, 5);
