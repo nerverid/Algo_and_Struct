@@ -8,52 +8,53 @@ public class CircularLinkedList {
 	class Node{
 		int data;
 		Node next;
-		Node prev;
+		//Node prev;
 		
 		Node (int data){
 			this.data = data;
 			next = null;
-			prev = null;
+			//prev = null;
 		}
 		
 		Node (){
 			next = null;
-			prev = null;
+			//prev = null;
 		}
 	}
 	
 	public void add (int data){
-		Node newNode = new Node ();
-		newNode.data = data;
+		Node newNode = new Node (data);
+		Node last = head;
 		if (head == null) {			// Проверяем на пустой список, если заголовок пуст то пишем туда элемент и выходим
 			head = newNode;
+			head.next = head;
 			return;
-		}							// Если список не пуст то,
-		newNode.next = null;		// перебираем весь список до последнего элемента
-		Node last = head;
-		while (last.next != null) {
-			last = last.next;
+		} else {							// Если список не пуст то,
+			while (last.next != head) {		// перебираем весь список до заголовка таким образом у нас кольцевой список элемента
+				last = last.next;
+			}
+			last.next = newNode;       // В последний элемент пишем.
+			newNode.next = head;		// и последний элемент обязательно ссылается на заголовок он же первый элемент
 		}
-		last.next = newNode;       // В последний элемент пишем.
-		return;
 	}
 	
 	public int count (){
 		Node newNode = head;
-		int Count = 0;
-		while (newNode != null){
+		int countN = 0;
+		do {
 			newNode = newNode.next;
-			Count++;
-		}
-		return Count;
+			countN++;
+		} while (newNode != head);		// в каждом цикле листаем список до первого-заголовка элемента, список кольцевой
+		System.out.println("Nodes = " + countN);
+		return countN;
 	}
 	
 	public void printList() {
 		Node newNode = head;
-		while (newNode != null) {
+		do {
 			System.out.print(newNode.data + " ");
 			newNode = newNode.next;
-		}
+		} while (newNode != head);		// в каждом цикле листаем список до первого-заголовка элемента, список кольцевой
 	}
 	
 	public static void main(String[] args) {
@@ -63,7 +64,7 @@ public class CircularLinkedList {
 		// Тестируем добавление элемента
 		cll.add(2);
 		cll.add(4);
-		//if (cll.count()> 1) System.out.println("Elements added. Test complit! Элементы добавлены. Тест пройден");
+		if (cll.count()> 1) System.out.println("Elements added. Test complit! Элементы добавлены. Тест пройден");
 		cll.printList();
 		/*
 		// Test for delete element into set
