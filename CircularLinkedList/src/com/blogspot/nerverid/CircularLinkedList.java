@@ -57,8 +57,24 @@ public class CircularLinkedList {
 		}		
 	}
 	
-	public int search (int data){
-		return 0;
+	public void insertAfter (Node prevNode, int data){
+		Node newNode = new Node(data);
+		if (prevNode != null){
+			System.out.println("");
+		} else return;
+			newNode.next = prevNode.next;
+			prevNode.next = newNode;
+	}
+	
+	public Node search (int data){
+		Node newNode = head;
+		do{
+			if (newNode.data == data){
+				break;
+			}
+			newNode = newNode.next;
+		} while (newNode != head);
+		return newNode;
 	}
 	
 	public int count (){
@@ -95,15 +111,17 @@ public class CircularLinkedList {
 		cll.delete(4);
 		if (cll.count()<2) System.out.println("Element delete. Test complit! Элемент удалён. Тест пройден!");
 		cll.printList();
-		/*
+		
 		// Test inserting new element after selected element
 		// Тестируем вставку элементов после выбранного
-		cll.insertAfter(head.next, 5);
-		if (cll.count()>=2) System.out.println ("Element inserting. Test complit! Элемент вставлен. Тест пройден!");
+		cll.insertAfter(cll.head.next, 5);
+		cll.printList();
+		if (cll.count()>1) System.out.println ("Element inserting. Test complit! Элемент вставлен. Тест пройден!");
+
 		// Test searching element
 		// Тестируем поиск элемента.
 		if (cll.search(5) != null) System.out.println("Element search complit. Test compit! Элемент найден. Тест пройден!");
-		*/
+	
 	}
 
 }
