@@ -41,7 +41,6 @@ public class CircularLinkedList {
 
 	public void delete (int data){
 		Node last = head;
-		CircularLinkedList ccl = new CircularLinkedList();
 		if (head == null){
 			System.out.println("Sets havn't Elements");
 			return;
