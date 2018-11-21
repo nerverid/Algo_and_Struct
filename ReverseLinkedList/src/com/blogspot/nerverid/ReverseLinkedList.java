@@ -19,6 +19,21 @@ public class ReverseLinkedList {
 		}
 	}
 	
+	// Метод добавления элемента. Add elements method
+	public void Add(int data){
+		Node newNode = new Node(data);
+		Node nodeNext = head;
+		newNode.next = null;
+		if (head == null){
+			head = newNode;
+		} else {
+			while (nodeNext != null){
+				nodeNext = nodeNext.next;
+			}
+			nodeNext.next = newNode;
+		}
+	}
+	
 	// метод вывода всех элементов
 	public void printList(){
 		Node ndNode = head;
@@ -30,6 +45,10 @@ public class ReverseLinkedList {
 	
 	static void main(String[] args) {
 		ReverseLinkedList rll = new ReverseLinkedList();
+		rll.Add(2);
+		rll.Add(4);
+		rll.Add(6);
+		rll.printList();
 	}
 
 }
