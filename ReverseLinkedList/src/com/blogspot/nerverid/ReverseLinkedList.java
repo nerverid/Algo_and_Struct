@@ -26,8 +26,8 @@ public class ReverseLinkedList {
 		newNode.next = null;
 		if (head == null){
 			head = newNode;
-		} else {
-			while (nodeNext != null){
+		} else{
+			while (nodeNext.next != null){
 				nodeNext = nodeNext.next;
 			}
 			nodeNext.next = newNode;
@@ -38,16 +38,28 @@ public class ReverseLinkedList {
 	public void printList(){
 		Node ndNode = head;
 		while (ndNode != null){
-			System.out.print(" " + ndNode);
+			System.out.print(" " + ndNode.data);
 			ndNode = ndNode.next;
 		}
 	}
 	
-	static void main(String[] args) {
+	// метод для тестирования. method for tests.
+	public int countList(){
+		Node ndNode = head;
+		int countLt = 0;
+		while (ndNode != null){
+			ndNode = ndNode.next;
+			countLt++;
+		}
+		return countLt;
+	}
+	
+	public static void main(String[] args) {
 		ReverseLinkedList rll = new ReverseLinkedList();
 		rll.Add(2);
 		rll.Add(4);
 		rll.Add(6);
+		if (rll.countList() >=3) System.out.println("Test correct. Тест выполнен!");
 		rll.printList();
 	}
 
