@@ -59,8 +59,10 @@ public class ReverseLinkedList {
 		rll.Add(2);
 		rll.Add(4);
 		rll.Add(6);
-		if (rll.countList() >=3) System.out.println("Test correct. Тест выполнен!");
 		rll.printList();
+		// Тест на добавлление в список. Test for add to List
+		if (rll.countList() >=3) System.out.println("Test correct. Тест выполнен!");
+		// Тест на разворот списка, последний элемент должен стать заголовком. Test for reverse List.
+		if (rll.head.data == 6) System.out.println("Test complit. Тест пройден.");
 	}
-
 }
