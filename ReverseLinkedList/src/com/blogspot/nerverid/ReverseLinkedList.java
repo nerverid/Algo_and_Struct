@@ -34,6 +34,21 @@ public class ReverseLinkedList {
 		}
 	}
 	
+	// Метод для разворота всего списка.
+	public Node reverse (){
+			Node prev = null; 		// Потребуются указатель на предыдущий элемент
+			Node current = head;	// Курсор на текущий элемент
+			Node next = null;		// Указатель на следующий
+			while (current != null){
+				next = current.next;
+				current.next = prev;
+				prev = current;
+				current = next;
+			}
+			head = prev;
+		return head;
+	}
+	
 	// метод вывода всех элементов
 	public void printList(){
 		Node ndNode = head;
@@ -63,6 +78,8 @@ public class ReverseLinkedList {
 		// Тест на добавлление в список. Test for add to List
 		if (rll.countList() >=3) System.out.println("Test correct. Тест выполнен!");
 		// Тест на разворот списка, последний элемент должен стать заголовком. Test for reverse List.
+		rll.reverse();
 		if (rll.head.data == 6) System.out.println("Test complit. Тест пройден.");
+		rll.printList();
 	}
 }
