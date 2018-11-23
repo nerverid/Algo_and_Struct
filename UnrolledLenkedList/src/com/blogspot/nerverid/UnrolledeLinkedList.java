@@ -21,7 +21,11 @@ public class UnrolledeLinkedList {
 	}
 	
 	public void insertNode(int data){
-		Node n1 = new Node (4);
+		Node n1 = new Node (data);
+		n1.dataArray[0]=1;
+		n1.dataArray[1]=2;
+		n1.dataArray[2]=3;
+		head = n1;
 	}
 	
 	public void printList (){
@@ -41,6 +45,7 @@ public class UnrolledeLinkedList {
 		
 		// Test for insert into empty class without it's methods.
 		// Тест на вставку в пустой класс без методов.
+		ull.insertNode(1);
 		ull.printList();
 	}
 
