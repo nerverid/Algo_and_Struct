@@ -6,7 +6,7 @@ public class UnrolledeLinkedList {
 	
 	public class Node{
 		int data;
-		int dataArray[] = new int [5];
+		int dataArray[];
 		Node next;
 		
 		Node(int data){
@@ -22,6 +22,16 @@ public class UnrolledeLinkedList {
 	
 	public void insertNode(int data){
 		Node n1 = new Node (data);
+		n1.dataArray = new int[5];
+		n1.dataArray[0]=1;
+		n1.dataArray[1]=2;
+		n1.dataArray[2]=3;
+		head = n1;
+	}
+	
+	public void insertNode(int data, int lengthArrayNew){
+		Node n1 = new Node (data);
+		n1.dataArray = new int[lengthArrayNew];
 		n1.dataArray[0]=1;
 		n1.dataArray[1]=2;
 		n1.dataArray[2]=3;
@@ -31,8 +41,8 @@ public class UnrolledeLinkedList {
 	public void printList (){
 		Node nextNode = head;
 		while(nextNode != null){
-			for (int nextData : nextNode.dataArray){
-				System.out.print(" " + nextNode.dataArray[nextData]);
+			for (int i=0 ; i< nextNode.dataArray.length; i++){
+				System.out.print(" " + nextNode.dataArray[i]);
 			}
 			nextNode = nextNode.next;
 		}
@@ -42,10 +52,11 @@ public class UnrolledeLinkedList {
 	 */
 	public static void main(String[] args) {
 		UnrolledeLinkedList ull = new UnrolledeLinkedList(); 
-		
 		// Test for insert into empty class without it's methods.
 		// Тест на вставку в пустой класс без методов.
 		ull.insertNode(1);
+		ull.printList();
+		ull.insertNode(2, 8);
 		ull.printList();
 	}
 
