@@ -44,9 +44,6 @@ public class UnrolledeLinkedList {
 		n1.dataArray = new int[lengthArrayNew];
 		Random random = new Random();
 		if (head == null) {
-			for (int i =0 ; i< lengthArrayNew; i++) {
-				n1.dataArray[i] = random.nextInt(10);
-			}
 			head = n1;
 		} else {
 			Node last = head;
@@ -54,20 +51,24 @@ public class UnrolledeLinkedList {
 				last = last.next;
 			}
 			last.next = n1;
+			for (int i =0 ; i< lengthArrayNew; i++) {
+				n1.dataArray[i] = random.nextInt(10);
+			}
 		}
 	}
 	
 	// Method for Tests. Count each elements 
 	// Метод для подсчёта всех элементов. Нужен для тестирования ваставки/удаления
-	public void countList() {
+	public int countList() {
 		Node nextNode = head;
+		int countEl =0;
 		while (nextNode != null) {
-			System.out.println("Node - " + nextNode.data);
 			for(int i = 0; i < nextNode.dataArray.length; i++) {
-				System.out.print(" " + nextNode.dataArray[i]);
+				countEl++;
 			}
 			nextNode = nextNode.next;
 		}
+		return countEl;
 	}
 	
 	// This method for print each elements of List and elements of Nodes
@@ -91,7 +92,9 @@ public class UnrolledeLinkedList {
 		// Test for insert into empty class without it's methods.
 		// Тест на вставку в пустой класс без методов.
 		ull.insertNode(1);
+		if (ull.countList() >=3 ) System.out.println("Node added. Test complit");
 		ull.insertNode(2, 8);
+		if (ull.countList() >5 ) System.out.println("Node added. Test complit");
 		ull.printList();
 	}
 
