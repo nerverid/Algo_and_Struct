@@ -29,32 +29,29 @@ class myQueue{
 	
 	private myNode head = null, tail = null;
 	private int emptySet = 0;
-	private int countElem = 0;
 	
 	public void insert(int data) {
-		if (isEmpty()) {
+		if (tail == null) {
 			myNode node = new myNode(data);
 			head = node;
 			tail = node;
 			emptySet ++;
-			countElem++;
 		} else {
 			myNode node = new myNode(data);
 			tail.next = node;
 			node.prev = tail;
 			tail = node;
 			emptySet++;
-			countElem++;
 		}
 	}
 	
 	public boolean remove () {
-		if (isEmpty()) {
+		if (tail == null) {
 			return false;
 		}else {
 			tail.prev.next = null;
 			tail = tail.prev;
-			countElem--;
+			emptySet--;
 			return true;
 		}
 	}
@@ -63,13 +60,9 @@ class myQueue{
 		return tail.getData();
 	}
 	
-	public boolean isEmpty() {
-		if (emptySet == 0) return true;
-		else return false;
-	}
 	
 	public int getCountEle() {
-		return countElem;
+		return emptySet;
 	}
 }
 
