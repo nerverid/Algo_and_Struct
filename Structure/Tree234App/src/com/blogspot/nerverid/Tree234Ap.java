@@ -29,9 +29,44 @@ class Node {
 		}
 	}
 	
-	public void disconectChild(int childNum) {
-		
+	public Node disconectChild(int childNum) {
+		Node tempNode = childArray[childNum];
+		childArray[childNum] = null;
+		return tempNode;
 	}
+	
+	public Node getChild(int childNum) {
+		return childArray[childNum];
+	}
+	
+	public Node getParent() {
+		return parent;
+	}
+	
+	public boolean isLeaf() {
+		return (childArray[0] == null) ? true : false;
+	}
+	
+	public DataItem getItem(int index) {
+		return itemArray[index];
+	}
+	
+	public boolean isFull() {
+		return (numItem == ORDER-1)? true :false;
+	}
+	
+	public int findItem(long key) {
+		for(int i = 0; i < ORDER-1; i++) {
+			if(itemArray[i] == null)
+				break;
+			else if (itemArray[i].dData == key) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	
 	
 }
 
