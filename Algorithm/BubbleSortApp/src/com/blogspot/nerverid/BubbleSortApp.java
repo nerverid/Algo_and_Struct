@@ -30,6 +30,10 @@ class BubbleSort{
 		}
 	}
 	
+	public void bubbleCombinSort() {
+		
+	}
+	
 	public void display() {
 		for (int i = 0; i < arBubble.length; i++) {
 			System.out.print(arBubble[i] + " ");
