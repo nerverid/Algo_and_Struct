@@ -31,7 +31,7 @@ class BubbleSort{
 	}
 	
 	public void bubbleCombinSort() {
-		for(int i=0; i <arBuble.length; i++){
+		for(int i=0; i <arBubble.length; i++){
 			// this combing sort
 		}
 	}
