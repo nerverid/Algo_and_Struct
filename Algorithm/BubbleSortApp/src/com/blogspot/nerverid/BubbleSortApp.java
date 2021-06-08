@@ -120,6 +120,7 @@ public class BubbleSortApp {
 		int nextDel = keyboard.nextInt();
 		System.out.println(bs.delete(nextDel));
 		bs.display();
+		//TDD forever
 	}
 
 }
