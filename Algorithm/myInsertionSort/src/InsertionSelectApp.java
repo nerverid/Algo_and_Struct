@@ -28,6 +28,7 @@ class InsertionSelect{
 		System.out.println();
 	}
 	
+	//сдвиг
 	public void insertSelectArr() {
 		int in, out;
 		for (out = 1 ; out < isArr.length; out++) {
