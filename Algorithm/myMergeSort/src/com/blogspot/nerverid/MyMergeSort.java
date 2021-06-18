@@ -10,7 +10,7 @@ public class MyMergeSort {
 		merge (arrayA, 4, arrayB, 6, arrayC);
 		display(arrayC, 10);
 	}
-	
+	//Слияние
 	public static void merge(int arrayA[], int sizeA, int []arrayB, int sizeB, int[] arrayC) {
 		int aDex = 0, bDex = 0, cDex =0;
 		while ((aDex < sizeA)&&(bDex < sizeB)) {
